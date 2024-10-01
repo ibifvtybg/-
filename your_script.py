@@ -138,6 +138,10 @@ if st.button("Predict"):
     plt.savefig("shap_summary_plot.png", bbox_inches='tight', dpi=1200)
     st.image("shap_summary_plot.png")
 
+    shap.initjs()
+    shap_plot = shap.force_plot(explainer.expected_value, shap_values[0], pd.DataFrame([feature_values], columns=feature_names))
+    st.components.v1.html(shap_plot.html(), height=500)
+
     fig, ax = plt.subplots()
     shap.force_plot(explainer.expected_value, shap_values[0], pd.DataFrame([feature_values], columns=feature_names), show=False)
     st.pyplot(fig)
