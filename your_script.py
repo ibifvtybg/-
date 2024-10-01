@@ -132,7 +132,7 @@ if st.button("Predict"):
 
     try:
         # 使用新的调用方式生成 force plot
-        shap.plots.force(explainer.expected_value[0], shap_values[0])
+        force_plot = shap.plots.force(explainer.expected_value[0], shap_values[0])
 
         # 手动显示图形进行调试
         plt.show()
@@ -144,3 +144,8 @@ if st.button("Predict"):
         st.image("shap_force_plot.png")
     except Exception as e:
         st.error(f"An error occurred: {e}")
+
+    # 打印一些调试信息
+    print("Expected value:", explainer.expected_value[0])
+    print("SHAP values:", shap_values[0])
+    print("Force plot object:", force_plot)
