@@ -134,13 +134,21 @@ if st.button("Predict"):
 
     st.write(f"shap_values: {shap_values}")
     st.write(f"explainer.expected_value: {explainer.expected_value}")
+    
+    def generate_shap_plot():
+    shap_plot = shap.force_plot(explainer.expected_value, shap_values[0], pd.DataFrame([feature_values], columns=feature_names))
+    fig = plt.gcf()
+    fig.savefig("shap_force_plot.png", bbox_inches='tight', dpi=1200)
+    return "shap_force_plot.png"
+
+    st.title("SHAP Force Plot")
+    image_path = generate_shap_plot()
+    st.image(image_path)
 
     shap_plot = shap.force_plot(explainer.expected_value, shap_values[0], pd.DataFrame([feature_values], columns=feature_names))
-
     # 保存图像
     fig = plt.gcf()
     fig.savefig("shap_force_plot.png", bbox_inches='tight', dpi=1200)
-
     # 在 Streamlit 中显示图像
     st.image("shap_force_plot.png")
 
