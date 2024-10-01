@@ -13,7 +13,7 @@ import shap
 import matplotlib.pyplot as plt
 
 # Load the model
-file_path = 'C:\\Users\\18657\\Desktop\\心脏病风险预测\\XGBoost.pkl'
+file_path = 'XGBoost.pkl'
 model = joblib.load(file_path)
 
 # Define feature options
