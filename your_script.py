@@ -149,3 +149,21 @@ if st.button("Predict"):
     print("Expected value:", explainer.expected_value[0])
     print("SHAP values:", shap_values[0])
     print("Force plot object:", force_plot)
+# Define some sample input data
+feature_values = [50, 1, 2, 120, 200, 0, 1, 150, 1, 1.0, 2, 0, 2]
+features = np.array([feature_values])
+
+# Calculate SHAP values
+explainer = shap.TreeExplainer(model)
+shap_values = explainer.shap_values(pd.DataFrame([feature_values], columns=[
+    "Age", "Sex", "Chest Pain Type", "Resting Blood Pressure", "Serum Cholesterol",
+    "Fasting Blood Sugar", "Resting ECG", "Max Heart Rate", "Exercise Induced Angina",
+    "ST Depression", "Slope", "Number of Vessels", "Thal"
+]))
+
+# Generate force plot
+force_plot = shap.plots.force(explainer.expected_value[0], shap_values[0])
+
+# Save and display the plot
+plt.savefig("shap_force_plot.png", bbox_inches='tight', dpi=1200)
+plt.show()
