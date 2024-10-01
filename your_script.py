@@ -130,16 +130,16 @@ if st.button("Predict"):
     explainer = shap.TreeExplainer(model)
     shap_values = explainer.shap_values(pd.DataFrame([feature_values], columns=feature_names))
 
-   try:
-       # 使用新的调用方式生成 force plot
-       shap.plots.force(explainer.expected_value, shap_values)
-       # 或者如果是多输出模型，使用以下方式
-       # shap.plots.force(explainer.expected_value[0], shap_values[..., 0])
+try:
+    # 使用新的调用方式生成 force plot
+    shap.plots.force(explainer.expected_value, shap_values)
+    # 或者如果是多输出模型，使用以下方式
+    # shap.plots.force(explainer.expected_value[0], shap_values[..., 0])
 
-       # 保存图片
-       plt.savefig("shap_force_plot.png", bbox_inches='tight', dpi=1200)
+    # 保存图片
+    plt.savefig("shap_force_plot.png", bbox_inches='tight', dpi=1200)
 
-       # 在 Streamlit 中显示图片
-       st.image("shap_force_plot.png")
-   except Exception as e:
-       st.error(f"An error occurred: {e}")
+    # 在 Streamlit 中显示图片
+    st.image("shap_force_plot.png")
+except Exception as e:
+    st.error(f"An error occurred: {e}")
