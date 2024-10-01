@@ -129,14 +129,9 @@ if st.button("Predict"):
     # Calculate SHAP values and display force plot
     explainer = shap.TreeExplainer(model)
     shap_values = explainer.shap_values(pd.DataFrame([feature_values], columns=feature_names))
-    st.write(f"Length of feature_values: {len(feature_values)}")
-    st.write(f"Length of feature_names: {len(feature_names)}")
 
-    shap.force_plot(explainer.expected_value, shap_values[0], pd.DataFrame([feature_values], columns=feature_names))
-    plt.savefig("shap_force_plot.png", bbox_inches='tight', dpi=1200)
-    try:
-        st.image("shap_force_plot.png")
-    except Exception as e:
-        st.error(f"An error occurred while loading the image: {e}")
+    fig = shap.force_plot(explainer.expected_value, shap_values[0], pd.DataFrame([feature_values], columns=feature_names), show=False) 
+    st.pyplot(fig)
+    
 
 
