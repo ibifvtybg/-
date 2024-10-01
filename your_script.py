@@ -132,9 +132,9 @@ if st.button("Predict"):
 
     try:
         # 使用新的调用方式生成 force plot
-        shap.plots.force(explainer.expected_value, shap_values)
+        #shap.plots.force(explainer.expected_value, shap_values)
         # 或者如果是多输出模型，使用以下方式
-        # shap.plots.force(explainer.expected_value[0], shap_values[..., 0])
+        shap.plots.force(explainer.expected_value[0], shap_values[0])
 
         # 保存图片
         plt.savefig("shap_force_plot.png", bbox_inches='tight', dpi=1200)
