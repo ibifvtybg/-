@@ -130,40 +130,8 @@ if st.button("Predict"):
     explainer = shap.TreeExplainer(model)
     shap_values = explainer.shap_values(pd.DataFrame([feature_values], columns=feature_names))
 
-    try:
-        # 使用新的调用方式生成 force plot
-        force_plot = shap.plots.force(explainer.expected_value[0], shap_values[0])
+    shap.force_plot(explainer.expected_value, shap_values[0], pd.DataFrame([feature_values], columns=feature_names), matplotlib=True)
+    plt.savefig("shap_force_plot.png", bbox_inches='tight', dpi=1200)
 
-        # 手动显示图形进行调试
-        plt.show()
+    st.image("shap_force_plot.png")
 
-        # 保存图片
-        plt.savefig("shap_force_plot.png", bbox_inches='tight', dpi=1200)
-
-        # 在 Streamlit 中显示图片
-        st.image("shap_force_plot.png")
-    except Exception as e:
-        st.error(f"An error occurred: {e}")
-
-    # 打印一些调试信息
-    print("Expected value:", explainer.expected_value[0])
-    print("SHAP values:", shap_values[0])
-    print("Force plot object:", force_plot)
-# Define some sample input data
-feature_values = [50, 1, 2, 120, 200, 0, 1, 150, 1, 1.0, 2, 0, 2]
-features = np.array([feature_values])
-
-# Calculate SHAP values
-explainer = shap.TreeExplainer(model)
-shap_values = explainer.shap_values(pd.DataFrame([feature_values], columns=[
-    "Age", "Sex", "Chest Pain Type", "Resting Blood Pressure", "Serum Cholesterol",
-    "Fasting Blood Sugar", "Resting ECG", "Max Heart Rate", "Exercise Induced Angina",
-    "ST Depression", "Slope", "Number of Vessels", "Thal"
-]))
-
-# Generate force plot
-force_plot = shap.plots.force(explainer.expected_value[0], shap_values[0])
-
-# Save and display the plot
-plt.savefig("shap_force_plot.png", bbox_inches='tight', dpi=1200)
-plt.show()
