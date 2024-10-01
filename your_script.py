@@ -133,6 +133,9 @@ if st.button("Predict"):
 
     shap.force_plot(explainer.expected_value, shap_values[0], pd.DataFrame([feature_values], columns=feature_names))
     plt.savefig("shap_force_plot.png", bbox_inches='tight', dpi=1200)
+    try:
+        st.image("shap_force_plot.png")
+    except Exception as e:
+        st.error(f"An error occurred while loading the image: {e}")
 
-    st.image("shap_force_plot.png")
 
