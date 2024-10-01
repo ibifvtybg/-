@@ -131,14 +131,14 @@ if st.button("Predict"):
     shap_values = explainer.shap_values(pd.DataFrame([feature_values], columns=feature_names))
 
     try:
-    # 生成 force plot
-    shap.force_plot(explainer.expected_value, shap_values[0], pd.DataFrame([feature_values], columns=feature_names), matplotlib=True)
+        # 生成 force plot
+        shap.force_plot(explainer.expected_value, shap_values[0], pd.DataFrame([feature_values], columns=feature_names), matplotlib=True)
 
-    # 保存图片
-    plt.savefig("shap_force_plot.png", bbox_inches='tight', dpi=1200)
+        # 保存图片
+        plt.savefig("shap_force_plot.png", bbox_inches='tight', dpi=1200)
 
-    # 在 Streamlit 中显示图片
-    st.image("shap_force_plot.png")
+        # 在 Streamlit 中显示图片
+        st.image("shap_force_plot.png")
     
     except Exception as e:
-    st.error(f"An error occurred: {e}")
+        st.error(f"An error occurred: {e}")
