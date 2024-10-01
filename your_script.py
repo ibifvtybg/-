@@ -144,9 +144,6 @@ if st.button("Predict"):
     # 在 Streamlit 中显示图像
     st.image("shap_force_plot.png")
 
-    shap.initjs()
-    shap_plot = shap.force_plot(explainer.expected_value, shap_values[0], pd.DataFrame([feature_values], columns=feature_names))
-    st.components.v1.html(shap_plot.html(), height=500)
 
 
     
