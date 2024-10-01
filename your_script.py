@@ -132,8 +132,6 @@ if st.button("Predict"):
     explainer = shap.TreeExplainer(model)
     shap_values = explainer.shap_values(pd.DataFrame([feature_values], columns=feature_names))
 
-    st.write(f"shap_values: {shap_values}")
-    st.write(f"explainer.expected_value: {explainer.expected_value}")
     
     def generate_shap_plot():
         shap_plot = shap.force_plot(explainer.expected_value, shap_values[0], pd.DataFrame([feature_values], columns=feature_names), matplotlib=True)
