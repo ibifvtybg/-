@@ -135,6 +135,8 @@ if st.button("Predict"):
     st.write(f"explainer.expected_value: {explainer.expected_value}")
 
     shap.summary_plot(shap_values, pd.DataFrame([feature_values], columns=feature_names))
+    plt.savefig("shap_summary_plot.png", bbox_inches='tight', dpi=1200)
+    st.image("shap_summary_plot.png")
 
     fig, ax = plt.subplots()
     shap.force_plot(explainer.expected_value, shap_values[0], pd.DataFrame([feature_values], columns=feature_names), show=False)
